@@ -1,0 +1,45 @@
+CREATE DATABASE CompanyDb;
+Use CompanyDb;
+CREATE TABLE Department(
+Id INT NOT NULL PRIMARY KEY IDENTITY  (1,1),
+Name NVARCHAR(25) NOT NULL,
+Hiring BIT,
+Location NVARCHAR(50));
+CREATE TABLE Employee(
+SSN NCHAR(9) NOT NULL PRIMARY KEY,
+DOB DATE,
+Phone NCHAR(10),
+FirstName NVARCHAR(30) NOT NULL,
+LastName NVARCHAR(30) NOT NULL,
+DEPARTMENTId NVARCHAR(25) NOT NULL);
+INSERT INTO Employee(SSN, DOB, FirstName, LastName)
+VALUES(123456789, 1/5/1975, 3135555505, 'Charles', 'Charleston', 'Shipping and Receiving'),
+(987654321, 5/2/1990,2489995555, 'Jimmy', 'Scrambles', 'Technology'),
+(456789123, 8/6/2001,7895555525, 'Vince', 'Jabowski', 'Technology'),
+(654854632, 4/6/1988, 3139721400, 'John', 'Johnston', 'Shipping and Receiving');
+INSERT INTO Department(Id, Name, Hiring, Location)
+VALUES (1, 'Technology', 'True', '1570 Woodward Ave'),
+(2, 'Shipping and Receiving', 'False', 'Southfield');
+
+UPDATE Employee
+SET LastName='Spiderman'
+WHERE DOB=(SELECT MIN(DOB));
+SELECT*FROM Employee
+WHERE LastName LIKE 'J';
+DELETE FROM Employee
+WHERE DOB =(SELECT MAX(DOB));
+SELECT*FROM Employee
+WHERE Phone LIKE 313;
+SELECT * FROM Employee
+WHERE DOB <9/9/1999;
+UPDATE Employee
+SET Phone=000000000
+WHERE DOB>1/1/2000;
+SELECT * FROM Employee
+WHERE Phone=0000000000;
+SELECT * FROM Employee, Department
+WHERE FirstName IS NOT NULL
+AND Location IS NOT NULL
+AND DEPARTMENTId IS NOT NULL;
+DELETE Department
+DELETE Employee;
